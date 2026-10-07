@@ -1,0 +1,2097 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>خانه‌ی الویه</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Vazirmatn", sans-serif;
+    background: #050505;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+
+    background:
+        repeating-linear-gradient(
+            135deg,
+            transparent 0px,
+            transparent 85px,
+            rgba(255, 193, 7, 0.055) 86px,
+            transparent 88px
+        ),
+        repeating-linear-gradient(
+            45deg,
+            transparent 0px,
+            transparent 120px,
+            rgba(150, 150, 150, 0.055) 121px,
+            transparent 123px
+        );
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 193, 7, 0.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(255, 193, 7, 0.05),
+            transparent 30%
+        );
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    padding: 18px 25px;
+
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255, 193, 7, 0.2);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #ffc107;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ffc107;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 65vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 70px 20px;
+}
+
+.hero-content {
+    max-width: 850px;
+
+    animation: heroIn 1s ease;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 8vw, 90px);
+
+    color: #ffc107;
+
+    margin-bottom: 15px;
+
+    text-shadow:
+        0 0 20px rgba(255, 193, 7, 0.25);
+}
+
+.hero p {
+    color: #d0d0d0;
+
+    font-size: 19px;
+
+    line-height: 2;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section {
+    padding: 70px 7%;
+}
+
+.section-title {
+    text-align: center;
+
+    font-size: 38px;
+
+    margin-bottom: 40px;
+
+    color: #ffc107;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.controls {
+    max-width: 850px;
+
+    margin: 0 auto 35px;
+}
+
+.search {
+    width: 100%;
+
+    padding: 17px 22px;
+
+    border-radius: 18px;
+
+    border: 1px solid #333;
+
+    background: #111;
+
+    color: white;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    transition: 0.3s;
+}
+
+.search:focus {
+    border-color: #ffc107;
+
+    box-shadow:
+        0 0 20px rgba(255, 193, 7, 0.12);
+}
+
+/* =========================
+   FAVORITES
+========================= */
+
+.favorite-filter {
+    display: block;
+
+    margin: 15px auto 0;
+
+    padding: 12px 20px;
+
+    border-radius: 14px;
+
+    border: 1px solid #ffc107;
+
+    background: transparent;
+
+    color: #ffc107;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+}
+
+.favorite-filter:hover,
+.favorite-filter.active {
+    background: #ffc107;
+
+    color: black;
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-bottom: 45px;
+}
+
+.category-btn {
+    padding: 12px 22px;
+
+    border-radius: 15px;
+
+    border: 1px solid #333;
+
+    background: #111;
+
+    color: #ddd;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+}
+
+.category-btn:hover {
+    border-color: #ffc107;
+
+    color: #ffc107;
+
+    transform: translateY(-2px);
+}
+
+.category-btn.active {
+    background: #ffc107;
+
+    color: #050505;
+
+    border-color: #ffc107;
+
+    font-weight: 700;
+}
+
+/* =========================
+   PRODUCTS GRID
+========================= */
+
+.products {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 25px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    position: relative;
+
+    background: rgba(15, 15, 15, 0.94);
+
+    border: 1px solid #292929;
+
+    border-radius: 24px;
+
+    padding: 25px;
+
+    min-height: 210px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    transform: translateX(80px);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease,
+        border-color 0.3s,
+        box-shadow 0.3s;
+}
+
+.card.right {
+    transform: translateX(-80px);
+}
+
+.card.show {
+    opacity: 1;
+
+    transform: translateX(0);
+}
+
+.card:hover {
+    border-color: rgba(255, 193, 7, 0.7);
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(255, 193, 7, 0.08);
+
+    transform: translateY(-7px);
+}
+
+.card h3 {
+    font-size: 22px;
+
+    color: #ffc107;
+
+    margin-bottom: 12px;
+
+    padding-left: 45px;
+}
+
+.card p {
+    color: #aaa;
+
+    line-height: 1.9;
+
+    font-size: 14px;
+
+    margin-bottom: 18px;
+}
+
+/* =========================
+   PRICE
+========================= */
+
+.price {
+    font-size: 20px;
+
+    color: #fff;
+
+    font-weight: 700;
+}
+
+.price span {
+    color: #ffc107;
+
+    font-size: 15px;
+
+    margin-right: 4px;
+}
+
+/* =========================
+   FAVORITE BUTTON
+========================= */
+
+.favorite {
+    position: absolute;
+
+    top: 20px;
+
+    left: 20px;
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    border: 1px solid #444;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    color: #aaa;
+
+    cursor: pointer;
+
+    font-size: 19px;
+
+    transition: 0.3s;
+
+    z-index: 5;
+}
+
+.favorite:hover {
+    color: #ffc107;
+
+    border-color: #ffc107;
+}
+
+.favorite.active {
+    color: #ffc107;
+
+    border-color: #ffc107;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact {
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(255, 193, 7, 0.035),
+            rgba(255, 193, 7, 0.015)
+        );
+
+    border-top: 1px solid #222;
+
+    border-bottom: 1px solid #222;
+}
+
+.contact p {
+    margin: 15px 0;
+
+    color: #ccc;
+
+    line-height: 2;
+}
+
+.contact a {
+    color: #ffc107;
+
+    text-decoration: none;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+
+    padding: 30px;
+
+    color: #666;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.82);
+
+    backdrop-filter: blur(8px);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 5000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    width: min(600px, 100%);
+
+    background: #111;
+
+    border: 1px solid #ffc107;
+
+    border-radius: 25px;
+
+    padding: 30px;
+
+    position: relative;
+
+    animation: modalIn 0.35s ease;
+}
+
+.close {
+    position: absolute;
+
+    top: 15px;
+
+    left: 18px;
+
+    border: none;
+
+    background: none;
+
+    color: #aaa;
+
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ffc107;
+}
+
+.modal h2 {
+    color: #ffc107;
+
+    margin-bottom: 15px;
+}
+
+.modal p {
+    color: #ccc;
+
+    line-height: 2;
+}
+
+.modal-rating {
+    color: #ffc107;
+
+    margin-top: 15px;
+
+    font-size: 18px;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes heroIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes modalIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.9)
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    header {
+        padding: 15px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    nav a {
+        margin-right: 8px;
+
+        font-size: 13px;
+    }
+
+    .hero {
+        min-height: 55vh;
+    }
+
+    .hero h1 {
+        font-size: 50px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    section {
+        padding: 55px 5%;
+    }
+
+    .section-title {
+        font-size: 30px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .categories {
+        gap: 8px;
+    }
+
+    .category-btn {
+        padding: 10px 15px;
+
+        font-size: 14px;
+    }
+
+}
+
+/* =========================
+   HIDDEN
+========================= */
+
+.hidden {
+    display: none !important;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        خانه‌ی الویه
+    </div>
+
+    <nav>
+        <a href="#products">محصولات</a>
+        <a href="#contact">تماس</a>
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            خانه‌ی الویه
+        </h1>
+
+        <p>
+            محصولات متنوع و خوشمزه
+            <br>
+            با قیمت‌های به‌روز
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<section id="products">
+
+    <h2 class="section-title">
+        لیست محصولات
+    </h2>
+
+
+    <!-- =========================
+         SEARCH + FAVORITES
+    ========================= -->
+
+    <div class="controls">
+
+        <input
+            type="text"
+            id="search"
+            class="search"
+            placeholder="جستجوی محصول..."
+        >
+
+        <button
+            id="favoriteFilter"
+            class="favorite-filter"
+        >
+            ⭐ فقط علاقه‌مندی‌ها
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================= -->
+
+    <div class="categories">
+
+        <button
+            class="category-btn active"
+            data-category="all"
+        >
+            همه
+        </button>
+
+        <button
+            class="category-btn"
+            data-category="main"
+        >
+            محصولات
+        </button>
+
+        <button
+            class="category-btn"
+            data-category="kg"
+        >
+            کیلویی
+        </button>
+
+        <button
+            class="category-btn"
+            data-category="drinks"
+        >
+            نوشابه و نوشیدنی‌ها
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         PRODUCTS
+    ========================= -->
+
+    <div
+        class="products"
+        id="productsGrid"
+    >
+
+
+        <!-- 1 -->
+        <div
+            class="card left"
+            data-category="main"
+            data-name="الویه مرغ"
+            data-price="430000"
+            data-description="الویه مرغ"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                الویه مرغ
+            </h3>
+
+            <p>
+                الویه مرغ
+            </p>
+
+            <div class="price">
+                ۴۳۰,۰۰۰
+                <span>تومان</span>
+            </div>
+
+        </div>
+
+
+        <!-- 2 -->
+        <div
+            class="card right"
+            data-category="main"
+            data-name="الویه کالباس"
+            data-price="380000"
+            data-description="الویه کالباس"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                الویه کالباس
+            </h3>
+
+            <p>
+                الویه کالباس
+            </p>
+
+            <div class="price">
+                ۳۸۰,۰۰۰
+                <span>تومان</span>
+            </div>
+
+        </div>
+
+
+        <!-- 3 -->
+        <div
+            class="card left"
+            data-category="main"
+            data-name="مارتا"
+            data-price="450000"
+            data-description="مارتا"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                مارتا
+            </h3>
+
+            <p>
+                مارتا
+            </p>
+
+            <div class="price">
+                ۴۵۰,۰۰۰
+                <span>تومان</span>
+            </div>
+
+        </div>
+
+
+        <!-- 4 -->
+        <div
+            class="card right"
+            data-category="main"
+            data-name="بندری"
+            data-price="430000"
+            data-description="بندری"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                بندری
+            </h3>
+
+            <p>
+                بندری
+            </p>
+
+            <div class="price">
+                ۴۳۰,۰۰۰
+                <span>تومان</span>
+            </div>
+
+        </div>
+
+
+        <!-- 5 -->
+        <div
+            class="card left"
+            data-category="main"
+            data-name="کالباس قارچ و مرغ"
+            data-price="980000"
+            data-description="کالباس قارچ و مرغ"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                کالباس قارچ و مرغ
+            </h3>
+
+            <p>
+                کالباس قارچ و مرغ
+            </p>
+
+            <div class="price">
+                ۹۸۰,۰۰۰
+                <span>تومان</span>
+            </div>
+
+        </div>
+
+
+        <!-- 6 -->
+        <div
+            class="card right"
+            data-category="main"
+            data-name="کالباس ممتاز ۹۰٪ گوشت قرمز"
+            data-price="1300000"
+            data-description="کالباس ممتاز ۹۰٪ گوشت قرمز"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                کالباس ممتاز ۹۰٪ گوشت قرمز
+            </h3>
+
+            <p>
+                کالباس ممتاز ۹۰٪ گوشت قرمز
+            </p>
+
+            <div class="price">
+                ۱,۳۰۰,۰۰۰
+                <span>تومان</span>
+            </div>
+
+        </div>
+
+
+        <!-- 7 -->
+        <div
+            class="card left"
+            data-category="main"
+            data-name="کالباس خشک خانواده ۶۰٪"
+            data-price="366000"
+            data-description="کالباس خشک خانواده ۶۰٪"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                کالباس خشک خانواده ۶۰٪
+            </h3>
+
+            <p>
+                کالباس خشک خانواده ۶۰٪
+            </p>
+
+            <div class="price">
+                ۳۶۶,۰۰۰
+                <span>تومان</span>
+            </div>
+
+        </div>
+
+
+        <!-- 8 -->
+        <div
+            class="card right"
+            data-category="main"
+            data-name="هات داگ"
+            data-price=""
+            data-description="هات داگ"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                هات داگ
+            </h3>
+
+            <p>
+                هات داگ
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 9 -->
+        <div
+            class="card left"
+            data-category="main"
+            data-name="هات داگ پنیری"
+            data-price="600000"
+            data-description="هات داگ پنیری"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                هات داگ پنیری
+            </h3>
+
+            <p>
+                هات داگ پنیری
+            </p>
+
+            <div class="price">
+                ۶۰۰,۰۰۰
+                <span>تومان</span>
+            </div>
+
+        </div>
+
+
+        <!-- 10 -->
+        <div
+            class="card right"
+            data-category="main"
+            data-name="ناگت"
+            data-price=""
+            data-description="ناگت"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                ناگت
+            </h3>
+
+            <p>
+                ناگت
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 11 -->
+        <div
+            class="card left"
+            data-category="main"
+            data-name="پنیر ورقه ای"
+            data-price=""
+            data-description="پنیر ورقه ای"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                پنیر ورقه ای
+            </h3>
+
+            <p>
+                پنیر ورقه ای
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 12 -->
+        <div
+            class="card right"
+            data-category="main"
+            data-name="پنیر پیتزا"
+            data-price=""
+            data-description="پنیر پیتزا"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                پنیر پیتزا
+            </h3>
+
+            <p>
+                پنیر پیتزا
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 13 -->
+        <div
+            class="card left"
+            data-category="main"
+            data-name="سیب زمینی منجمد نیمه آماده"
+            data-price=""
+            data-description="سیب زمینی منجمد نیمه آماده"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                سیب زمینی منجمد نیمه آماده
+            </h3>
+
+            <p>
+                سیب زمینی منجمد نیمه آماده
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 14 -->
+        <div
+            class="card right"
+            data-category="main"
+            data-name="فلافل فله ای"
+            data-price=""
+            data-description="فلافل فله ای"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                فلافل فله ای
+            </h3>
+
+            <p>
+                فلافل فله ای
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 15 -->
+        <div
+            class="card left"
+            data-category="main"
+            data-name="کتلت فله ای"
+            data-price=""
+            data-description="کتلت فله ای"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                کتلت فله ای
+            </h3>
+
+            <p>
+                کتلت فله ای
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             KILOGRAM
+        ========================= -->
+
+
+        <!-- 16 -->
+        <div
+            class="card right"
+            data-category="kg"
+            data-name="ناگت کیلویی"
+            data-price=""
+            data-description="ناگت کیلویی"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                ناگت
+            </h3>
+
+            <p>
+                فروش کیلویی
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 17 -->
+        <div
+            class="card left"
+            data-category="kg"
+            data-name="الویه کیلویی"
+            data-price=""
+            data-description="الویه کیلویی"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                الویه
+            </h3>
+
+            <p>
+                فروش کیلویی
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 18 -->
+        <div
+            class="card right"
+            data-category="kg"
+            data-name="بندری کیلویی"
+            data-price=""
+            data-description="بندری کیلویی"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                بندری
+            </h3>
+
+            <p>
+                فروش کیلویی
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 19 -->
+        <div
+            class="card left"
+            data-category="kg"
+            data-name="مارتا کیلویی"
+            data-price=""
+            data-description="مارتا کیلویی"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                مارتا
+            </h3>
+
+            <p>
+                فروش کیلویی
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             DRINKS
+        ========================= -->
+
+
+        <!-- 20 -->
+        <div
+            class="card right"
+            data-category="drinks"
+            data-name="انواع نوشابه‌ها"
+            data-price=""
+            data-description="انواع نوشابه‌ها"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                انواع نوشابه‌ها
+            </h3>
+
+            <p>
+                انواع نوشابه‌ها
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 21 -->
+        <div
+            class="card left"
+            data-category="drinks"
+            data-name="نوشیدنی‌های انرژی‌زا"
+            data-price=""
+            data-description="نوشیدنی‌های انرژی‌زا"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                نوشیدنی‌های انرژی‌زا
+            </h3>
+
+            <p>
+                نوشیدنی‌های انرژی‌زا
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 22 -->
+        <div
+            class="card right"
+            data-category="drinks"
+            data-name="آبمیوه‌ها"
+            data-price=""
+            data-description="آبمیوه‌ها"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                آبمیوه‌ها
+            </h3>
+
+            <p>
+                آبمیوه‌ها
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- 23 -->
+        <div
+            class="card left"
+            data-category="drinks"
+            data-name="انواع دلسترها"
+            data-price=""
+            data-description="انواع دلسترها"
+            data-rating="★★★★★"
+        >
+
+            <button class="favorite">
+                ☆
+            </button>
+
+            <h3>
+                انواع دلسترها
+            </h3>
+
+            <p>
+                انواع دلسترها
+            </p>
+
+            <div class="price">
+                -
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section
+    id="contact"
+    class="contact"
+>
+
+    <h2 class="section-title">
+        تماس با ما
+    </h2>
+
+    <p>
+        📞
+        <a href="tel:09903114899">
+            0990 311 4899
+        </a>
+    </p>
+
+    <p>
+        📍 بندر عباس، بلوار شهدا، به سمت راه آهن،
+        جنب پل خواجو، مغازه خانه الویه
+    </p>
+
+</section>
+
+
+<footer>
+    © ۱۴۰۵ خانه‌ی الویه
+</footer>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="modal"
+>
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            id="closeModal"
+        >
+            ×
+        </button>
+
+        <h2 id="modalTitle">
+            محصول
+        </h2>
+
+        <p id="modalDescription">
+            توضیحات
+        </p>
+
+        <div
+            class="modal-rating"
+            id="modalRating"
+        >
+            ★★★★★
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   💰 قیمت‌ها
+   =====================================================
+
+   بعداً فقط عددهای این بخش را تغییر بده.
+   لازم نیست داخل کارت‌های محصولات چیزی بگردی.
+
+===================================================== */
+
+const prices = {
+
+    oliviehMorgh: 430000,
+
+    oliviehKalbas: 380000,
+
+    marta: 450000,
+
+    bandari: 430000,
+
+    kalbasMorgh: 980000,
+
+    kalbasMomtaz: 1300000,
+
+    kalbasKhoshk: 366000,
+
+    hotdog: null,
+
+    hotdogPaniri: 600000,
+
+    nagget: null,
+
+    panirVaraqei: null,
+
+    panirPizza: null,
+
+    sibZamini: null,
+
+    falafel: null,
+
+    kotlet: null,
+
+    naggetKg: null,
+
+    oliviehKg: null,
+
+    bandariKg: null,
+
+    martaKg: null,
+
+    anvaeNoshabe: null,
+
+    energy: null,
+
+    abMive: null,
+
+    delster: null
+
+};
+
+
+/* =====================================================
+   تبدیل عدد به فارسی
+===================================================== */
+
+function persianNumber(number) {
+
+    return String(number)
+        .replace(/\d/g, d =>
+            "۰۱۲۳۴۵۶۷۸۹"[d]
+        );
+
+}
+
+
+/* =====================================================
+   فرمت قیمت
+===================================================== */
+
+function formatPrice(price) {
+
+    if (
+        price === null ||
+        price === undefined ||
+        price === ""
+    ) {
+
+        return "-";
+
+    }
+
+    return persianNumber(
+        Number(price).toLocaleString("en-US")
+    ) + " تومان";
+
+}
+
+
+/* =====================================================
+   اتصال قیمت‌ها به کارت‌ها
+===================================================== */
+
+const priceMap = [
+
+    ["الویه مرغ", prices.oliviehMorgh],
+    ["الویه کالباس", prices.oliviehKalbas],
+    ["مارتا", prices.marta],
+    ["بندری", prices.bandari],
+    ["کالباس قارچ و مرغ", prices.kalbasMorgh],
+    ["کالباس ممتاز ۹۰٪ گوشت قرمز", prices.kalbasMomtaz],
+    ["کالباس خشک خانواده ۶۰٪", prices.kalbasKhoshk],
+    ["هات داگ", prices.hotdog],
+    ["هات داگ پنیری", prices.hotdogPaniri],
+    ["ناگت", prices.nagget],
+    ["پنیر ورقه ای", prices.panirVaraqei],
+    ["پنیر پیتزا", prices.panirPizza],
+    ["سیب زمینی منجمد نیمه آماده", prices.sibZamini],
+    ["فلافل فله ای", prices.falafel],
+    ["کتلت فله ای", prices.kotlet],
+
+    ["ناگت کیلویی", prices.naggetKg],
+    ["الویه کیلویی", prices.oliviehKg],
+    ["بندری کیلویی", prices.bandariKg],
+    ["مارتا کیلویی", prices.martaKg],
+
+    ["انواع نوشابه‌ها", prices.anvaeNoshabe],
+    ["نوشیدنی‌های انرژی‌زا", prices.energy],
+    ["آبمیوه‌ها", prices.abMive],
+    ["انواع دلسترها", prices.delster]
+
+];
+
+
+const allCards =
+    document.querySelectorAll(".card");
+
+
+allCards.forEach(card => {
+
+    const name =
+        card.dataset.name;
+
+    const found =
+        priceMap.find(
+            item => item[0] === name
+        );
+
+    if (found) {
+
+        const priceElement =
+            card.querySelector(".price");
+
+        priceElement.textContent =
+            formatPrice(found[1]);
+
+    }
+
+});
+
+
+/* =====================================================
+   FAVORITES
+===================================================== */
+
+const favoriteButtons =
+    document.querySelectorAll(".favorite");
+
+
+let favorites =
+    JSON.parse(
+        localStorage.getItem(
+            "oliviehFavorites"
+        ) || "[]"
+    );
+
+
+function updateFavorites() {
+
+    favoriteButtons.forEach(button => {
+
+        const card =
+            button.closest(".card");
+
+        const name =
+            card.dataset.name;
+
+        if (
+            favorites.includes(name)
+        ) {
+
+            button.classList.add("active");
+
+            button.textContent = "★";
+
+        } else {
+
+            button.classList.remove("active");
+
+            button.textContent = "☆";
+
+        }
+
+    });
+
+
+    localStorage.setItem(
+        "oliviehFavorites",
+        JSON.stringify(favorites)
+    );
+
+}
+
+
+favoriteButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+            const card =
+                button.closest(".card");
+
+            const name =
+                card.dataset.name;
+
+
+            if (
+                favorites.includes(name)
+            ) {
+
+                favorites =
+                    favorites.filter(
+                        item =>
+                            item !== name
+                    );
+
+            } else {
+
+                favorites.push(name);
+
+            }
+
+
+            updateFavorites();
+
+            filterProducts();
+
+        }
+    );
+
+});
+
+
+updateFavorites();
+
+
+/* =====================================================
+   SEARCH + CATEGORY
+===================================================== */
+
+const search =
+    document.getElementById("search");
+
+
+const categoryButtons =
+    document.querySelectorAll(
+        ".category-btn"
+    );
+
+
+let currentCategory = "all";
+
+let showingFavorites = false;
+
+
+function filterProducts() {
+
+    const text =
+        search.value
+            .trim()
+            .toLowerCase();
+
+
+    allCards.forEach(card => {
+
+        const name =
+            card.dataset.name
+                .toLowerCase();
+
+
+        const matchesSearch =
+            name.includes(text);
+
+
+        const matchesCategory =
+            currentCategory === "all" ||
+            card.dataset.category ===
+            currentCategory;
+
+
+        const matchesFavorites =
+            !showingFavorites ||
+            favorites.includes(
+                card.dataset.name
+            );
+
+
+        if (
+            matchesSearch &&
+            matchesCategory &&
+            matchesFavorites
+        ) {
+
+            card.style.display = "";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+search.addEventListener(
+    "input",
+    filterProducts
+);
+
+
+categoryButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            categoryButtons.forEach(
+                btn =>
+                    btn.classList.remove(
+                        "active"
+                    )
+            );
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            currentCategory =
+                button.dataset.category;
+
+
+            filterProducts();
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   FAVORITE FILTER
+===================================================== */
+
+const favoriteFilter =
+    document.getElementById(
+        "favoriteFilter"
+    );
+
+
+favoriteFilter.addEventListener(
+    "click",
+    () => {
+
+        showingFavorites =
+            !showingFavorites;
+
+
+        favoriteFilter.classList.toggle(
+            "active",
+            showingFavorites
+        );
+
+
+        filterProducts();
+
+    }
+);
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+const modal =
+    document.getElementById(
+        "modal"
+    );
+
+
+const modalTitle =
+    document.getElementById(
+        "modalTitle"
+    );
+
+
+const modalDescription =
+    document.getElementById(
+        "modalDescription"
+    );
+
+
+const modalRating =
+    document.getElementById(
+        "modalRating"
+    );
+
+
+const closeModal =
+    document.getElementById(
+        "closeModal"
+    );
+
+
+allCards.forEach(card => {
+
+    card.addEventListener(
+        "click",
+        () => {
+
+            modalTitle.textContent =
+                card.dataset.name;
+
+
+            modalDescription.textContent =
+                card.dataset.description;
+
+
+            modalRating.textContent =
+                card.dataset.rating;
+
+
+            modal.classList.add(
+                "show"
+            );
+
+        }
+    );
+
+});
+
+
+closeModal.addEventListener(
+    "click",
+    () => {
+
+        modal.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+modal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target === modal
+        ) {
+
+            modal.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SCROLL ANIMATION
+===================================================== */
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.classList.add(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: 0.12
+        }
+    );
+
+
+allCards.forEach(card => {
+
+    observer.observe(card);
+
+});
+
+</script>
+
+</body>
+</html>
